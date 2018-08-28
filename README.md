@@ -14,3 +14,5 @@ Changelog:
 - Updated Write-Hosts for Write-Outputs
 - Added some troubleshooting hints
 
+Test script using: ```powershell.exe -ExecutionPolicy Bypass .\WLANManager.ps1```
+
