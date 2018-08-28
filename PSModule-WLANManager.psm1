@@ -1,4 +1,4 @@
-<#
+﻿<#
 ################
 # WLAN Manager #
 ################
@@ -66,7 +66,7 @@ function Enable-WLANAdapters
 function Test-WiredConnection
 {
 ## Get only wired connections with IP-address
-$NetworkConnectionsLAN = Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter “IPEnabled=TRUE” | Where-Object {($_.Description -notlike “*VirtualBox*”) -and ($_.Description -notlike “*VMware*”) -and ($_.Description -notlike “*Wireless*”) -and ($_.Description -notlike “*Wi-Fi*”)}
+$NetworkConnectionsLAN = Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter “IPEnabled=TRUE” | Where-Object {($_.Description -notlike “*VirtualBox*”) -and ($_.Description -notlike “*VMware*”) -and ($_.Description -notlike “*Wireless*”) -and ($_.Description -notlike “*Wi-Fi*”) -and ($_.Description -notlike “*vEthernet*”) -and ($_.Description -notmatch “Ethernet \d”) -and ($_.Description -notlike "*Hyper-V*") -and ($_.Description -notlike "*Virtual*") -and ($_.Description -notlike “*W*Lan*”)}
 
 If ($NetworkConnectionsLAN -eq $null)
     {
@@ -74,6 +74,7 @@ If ($NetworkConnectionsLAN -eq $null)
     }
 ElseIf ($NetworkConnectionsLAN -ne $null)
     {
+		Write-Host $NetworkConnectionsLAN
         return $true
     }
 }
